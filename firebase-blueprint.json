@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role-based access control.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "faculty", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Material": {
+      "title": "Educational Material",
+      "description": "Uploaded content by faculty.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["research_paper", "subject_material", "question_paper"] },
+        "facultyId": { "type": "string" },
+        "facultyName": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "validated"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "type", "facultyId", "status"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "A single message in an AI conversation.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "content", "timestamp"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles restricted to owners and admins."
+    },
+    "materials/{materialId}": {
+      "schema": "Material",
+      "description": "Educational materials uploaded by faculty."
+    },
+    "chats/{chatId}": {
+      "schema": "object",
+      "description": "Root chat document."
+    },
+    "chats/{chatId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Chat messages between student and AI."
+    }
+  }
+}

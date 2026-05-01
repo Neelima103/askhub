@@ -1,0 +1,6 @@
+{
+  "name": "AskHub",
+  "description": "An educational Hub where students access materials and get AI-powered answers based on faculty-uploaded content, featuring role-based access for students, faculty, and admins.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["AI Study Assistant", "Role-Based Access Control", "Educational Resource Hub"]
+}
